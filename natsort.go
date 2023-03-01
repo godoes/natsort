@@ -27,87 +27,86 @@ func Sort(l []string) {
 
 // Compare returns true if the first string precedes the second one according to natural order
 func Compare(a, b string) bool {
-	ln_a := len(a)
-	ln_b := len(b)
-	posa := 0
-	posb := 0
+	lnA := len(a)
+	lnB := len(b)
+	posA := 0
+	posB := 0
 
 	for {
-		if ln_a <= posa {
-			if ln_b <= posb {
+		if lnA <= posA {
+			if lnB <= posB {
 				// eof on both at the same time (equal)
 				return false
 			}
 			return true
-		} else if ln_b <= posb {
+		} else if lnB <= posB {
 			// eof on b
 			return false
 		}
 
-		av, bv := a[posa], b[posb]
+		av, bv := a[posA], b[posB]
 
 		if av >= '0' && av <= '9' && bv >= '0' && bv <= '9' {
 			// go into numeric mode
-			intlna := 1
-			intlnb := 1
+			intLnA := 1
+			intLnB := 1
 			for {
-				if posa+intlna >= ln_a {
+				if posA+intLnA >= lnA {
 					break
 				}
-				x := a[posa+intlna]
+				x := a[posA+intLnA]
 				if av == '0' {
-					posa += 1
+					posA += 1
 					av = x
 					continue
 				}
 				if x >= '0' && x <= '9' {
-					intlna += 1
+					intLnA += 1
 				} else {
 					break
 				}
 			}
 			for {
-				if posb+intlnb >= ln_b {
+				if posB+intLnB >= lnB {
 					break
 				}
-				x := b[posb+intlnb]
+				x := b[posB+intLnB]
 				if bv == '0' {
-					posb += 1
+					posB += 1
 					bv = x
 					continue
 				}
 				if x >= '0' && x <= '9' {
-					intlnb += 1
+					intLnB += 1
 				} else {
 					break
 				}
 			}
-			if intlnb > intlna {
+			if intLnB > intLnA {
 				// length of a value is longer, means it's a bigger number
 				return true
-			} else if intlna > intlnb {
+			} else if intLnA > intLnB {
 				return false
 			}
 			// both have same length, let's compare as string
-			v := strings.Compare(a[posa:posa+intlna], b[posb:posb+intlnb])
+			v := strings.Compare(a[posA:posA+intLnA], b[posB:posB+intLnB])
 			if v < 0 {
 				return true
 			} else if v > 0 {
 				return false
 			}
-			// equale
-			posa += intlna
-			posb += intlnb
+			// equal
+			posA += intLnA
+			posB += intLnB
 			continue
 		}
 
 		if av == bv {
-			posa += 1
-			posb += 1
+			posA += 1
+			posB += 1
 			continue
 		}
 
 		return av < bv
 	}
-	return false
 }

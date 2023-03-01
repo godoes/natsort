@@ -1,5 +1,4 @@
-[![GoDoc](https://godoc.org/facette.io/natsort?status.svg)](https://godoc.org/facette.io/natsort)
-
+[![GoDoc](https://godoc.org/facette.io/natsort?status.svg)](https://pkg.go.dev/github.com/godoes/natsort)
 
 # natsort: natural strings sorting in Go
 
@@ -33,14 +32,14 @@ PASS
 
 ## Usage
 
-```go
+```shell
 package main
 
 import (
     "fmt"
     "strings"
 
-    "facette.io/natsort"
+    "godoes/natsort"
 )
 
 func main() {
